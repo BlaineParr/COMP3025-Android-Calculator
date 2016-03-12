@@ -28,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     private int arithType;
     private String arithTypeString;
 
+    //widgets
     private TextView outputTextView;
     private Button clearButton;
     private Button posNegButton;
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         this.secondNum = 0;
         this.secondNumString = "0";
         this.isFirstNum = true;
+        this.arithType = -1;
 
         //widget initialization
         this.outputTextView = (TextView) findViewById(R.id.outputTextView);
@@ -175,6 +177,12 @@ public class MainActivity extends AppCompatActivity {
                 setArithType(DIVISION);
             } //method onClick ends
         }); //setOnClickListener ends
+
+        this.calculateButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                calculate();
+            } //method onClick ends
+        }); //setOnClickListener ends
     } //method onCreate ends
 
     //private methods//////////////////////////////////////////////////////////////////////////////
@@ -239,10 +247,38 @@ public class MainActivity extends AppCompatActivity {
             case DIVISION: this.arithTypeString = " / ";
         } //switch ends
 
-        isFirstNum = false;
+        if(isFirstNum){
+            isFirstNum = false;
+        } //if ends
+        else{
+            calculate();
+        } //else ends
 
         arithType = i;
 
         this.outputTextView.setText(this.firstNumString + this.arithTypeString);
     } //method setArithType ends
+
+    private void calculate(){
+        if(this.arithType != -1 && secondNumString != "") {
+            firstNum = Double.parseDouble(firstNumString);
+            secondNum = Double.parseDouble(secondNumString);
+
+            switch(arithType){
+                case ADDITION: firstNum += secondNum;
+                    break;
+                case SUBTRACTION: firstNum -= secondNum;
+                    break;
+                case MULTIPLICATION: firstNum *= secondNum;
+                    break;
+                case DIVISION: firstNum /= secondNum;
+            } //switch ends
+
+            firstNumString = String.valueOf(firstNum);
+
+            secondNumString = "";
+
+            this.outputTextView.setText(this.firstNumString);
+        } //if ends
+    } //method calculate ends
 } //class MainActivity ends
