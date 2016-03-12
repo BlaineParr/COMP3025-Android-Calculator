@@ -1,3 +1,13 @@
+/*
+ * COMP3025-Android-Calculator
+ * Blaine Parr
+ *
+ * Date: March 12, 2016
+ * Purpose: This is a simple calculator app which can add, subtract, multiply and divide. It has
+ * options to make the numbers negative and to convert the second number to a percentage of the
+ * first.
+ */
+
 package ca.georgiancollege.comp3025_android_calculator;
 
 import android.os.Bundle;
@@ -10,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+
+import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,6 +39,9 @@ public class MainActivity extends AppCompatActivity {
     private boolean isFirstNum;
     private int arithType;
     private String arithTypeString;
+    private boolean resetRequired;
+
+    DecimalFormat decFormat;
 
     //widgets
     private TextView outputTextView;
@@ -64,6 +79,9 @@ public class MainActivity extends AppCompatActivity {
         this.secondNumString = "";
         this.isFirstNum = true;
         this.arithType = -1;
+        this.resetRequired = false;
+
+        decFormat = new DecimalFormat("0.##########");
 
         //widget initialization
         this.outputTextView = (TextView) findViewById(R.id.outputTextView);
@@ -90,109 +108,145 @@ public class MainActivity extends AppCompatActivity {
         //add methods to button clicks
         this.oneButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setNum("1");
+                if(!resetRequired) {
+                    setNum("1");
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.twoButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setNum("2");
+                if(!resetRequired) {
+                    setNum("2");
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.threeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setNum("3");
+                if(!resetRequired) {
+                    setNum("3");
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.fourButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setNum("4");
+                if(!resetRequired) {
+                    setNum("4");
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.fiveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setNum("5");
+                if(!resetRequired) {
+                    setNum("5");
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.sixButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setNum("6");
+                if(!resetRequired) {
+                    setNum("6");
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.sevenButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setNum("7");
+                if(!resetRequired) {
+                    setNum("7");
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.eightButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setNum("8");
+                if(!resetRequired) {
+                    setNum("8");
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.nineButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setNum("9");
+                if(!resetRequired) {
+                    setNum("9");
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.zeroButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setNum("0");
+                if(!resetRequired) {
+                    setNum("0");
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.decimalButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setNum(".");
+                if(!resetRequired) {
+                    setNum(".");
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setArithType(ADDITION);
+                if(!resetRequired) {
+                    setArithType(ADDITION);
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.subtractButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setArithType(SUBTRACTION);
+                if(!resetRequired) {
+                    setArithType(SUBTRACTION);
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.multiplyButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setArithType(MULTIPLICATION);
+                if(!resetRequired) {
+                    setArithType(MULTIPLICATION);
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.divideButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setArithType(DIVISION);
+                if(!resetRequired) {
+                    setArithType(DIVISION);
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.calculateButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                calculate();
+                if(!resetRequired) {
+                    calculate();
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.posNegButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                posNeg();
+                if(!resetRequired) {
+                    posNeg();
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
         this.percentButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                percent();
+                if(!resetRequired) {
+                    percent();
+                } //if ends
             } //method onClick ends
         }); //setOnClickListener ends
 
@@ -204,6 +258,9 @@ public class MainActivity extends AppCompatActivity {
     } //method onCreate ends
 
     //private methods//////////////////////////////////////////////////////////////////////////////
+    /*
+     * This function sets the number value of the two numbers.
+     */
     private void setNum(String s){
         //check if it's the first or second number
         if(this.isFirstNum){
@@ -253,6 +310,10 @@ public class MainActivity extends AppCompatActivity {
         }
     } //method setNum ends
 
+    /*
+     * This function changes the arithmetic type. The options are addition, subtraction,
+     * multiplication and division.
+     */
     private void setArithType(int i){
         //check what the user input and change the arith type and displayed string accordingly
         switch(i){
@@ -279,7 +340,13 @@ public class MainActivity extends AppCompatActivity {
         this.outputTextView.setText(this.firstNumString + this.arithTypeString);
     } //method setArithType ends
 
+    /*
+     * This function performs the mathematical operation between the two input numbers.
+     */
     private void calculate(){
+        //local variables
+        boolean error = false;
+
         //if an arithType was input and the secondNumString isn't blank
         if(this.arithType != -1 && this.secondNumString != "") {
 
@@ -295,20 +362,39 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case MULTIPLICATION: this.firstNum *= this.secondNum;
                     break;
-                case DIVISION: this.firstNum /= this.secondNum;
+                //don't allow the user to divide by zero
+                case DIVISION: if(this.secondNum == 0){
+                        error = true;
+                    }
+                    else{
+                        this.firstNum /= this.secondNum;
+                    } //else ends
             } //switch ends
 
-            //convert the calculated number back to a string
-            firstNumString = String.valueOf(firstNum);
+            //if no errors occured
+            if(!error) {
+                //display the calculated number, only put decimal places if necessary
+                firstNumString = decFormat.format(firstNum);
 
-            //set the secondNumString to blank
-            secondNumString = "";
+                //set the secondNumString to blank
+                secondNumString = "";
+            } //if ends
+
+            //if an error occured, force a reset
+            else{
+                firstNumString = "Undefined";
+                resetRequired = true;
+            } //else ends
+
 
             //output the calculated number
             this.outputTextView.setText(this.firstNumString);
         } //if ends
     } //method calculate ends
 
+    /*
+     * This function converts the numbers between positive and negative.
+     */
     private void posNeg(){
         //if it's the first number
         if(this.isFirstNum){
@@ -345,6 +431,9 @@ public class MainActivity extends AppCompatActivity {
         } //else ends
     } //method posNeg ends
 
+    /*
+     * This function converts the second number to a percentage of the first.
+     */
     private void percent(){
         //make sure we're on the second number and it's not blank
         if(!isFirstNum && secondNumString != ""){
@@ -362,6 +451,9 @@ public class MainActivity extends AppCompatActivity {
         } //if ends
     } //method percent ends
 
+    /*
+     * This function resets the calculator to its original state.
+     */
     private void clear(){
         //reset all values
         this.firstNum = 0;
@@ -370,6 +462,8 @@ public class MainActivity extends AppCompatActivity {
         this.secondNumString = "";
         this.isFirstNum = true;
         this.arithType = -1;
+        this.resetRequired = false;
+        this.resetRequired = false;
 
         this.outputTextView.setText(this.firstNumString); //update the display
     } //method clear ends
