@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         this.firstNum = 0;
         this.firstNumString = "0";
         this.secondNum = 0;
-        this.secondNumString = "0";
+        this.secondNumString = "";
         this.isFirstNum = true;
         this.arithType = -1;
 
@@ -183,6 +183,24 @@ public class MainActivity extends AppCompatActivity {
                 calculate();
             } //method onClick ends
         }); //setOnClickListener ends
+
+        this.posNegButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                posNeg();
+            } //method onClick ends
+        }); //setOnClickListener ends
+
+        this.percentButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                percent();
+            } //method onClick ends
+        }); //setOnClickListener ends
+
+        this.clearButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                clear();
+            } //method onClick ends
+        }); //setOnClickListener ends
     } //method onCreate ends
 
     //private methods//////////////////////////////////////////////////////////////////////////////
@@ -210,7 +228,6 @@ public class MainActivity extends AppCompatActivity {
             //update the output
             this.outputTextView.setText(this.firstNumString);
         } //if ends
-
         else
         {
             //if the number is equal to 0 and the user hasn't input a decimal
@@ -237,6 +254,7 @@ public class MainActivity extends AppCompatActivity {
     } //method setNum ends
 
     private void setArithType(int i){
+        //check what the user input and change the arith type and displayed string accordingly
         switch(i){
             case ADDITION: this.arithTypeString = " + ";
                 break;
@@ -247,38 +265,112 @@ public class MainActivity extends AppCompatActivity {
             case DIVISION: this.arithTypeString = " / ";
         } //switch ends
 
-        if(isFirstNum){
-            isFirstNum = false;
+        //if it was the firstNum, it's no longer the firstNum
+        if(this.isFirstNum){
+            this.isFirstNum = false;
         } //if ends
         else{
-            calculate();
+            this.calculate(); //calculate the expression, this allows for continuous calculations
         } //else ends
 
-        arithType = i;
+        this.arithType = i; //set the arithType
 
+        //output the firstNumString and the arithType
         this.outputTextView.setText(this.firstNumString + this.arithTypeString);
     } //method setArithType ends
 
     private void calculate(){
-        if(this.arithType != -1 && secondNumString != "") {
-            firstNum = Double.parseDouble(firstNumString);
-            secondNum = Double.parseDouble(secondNumString);
+        //if an arithType was input and the secondNumString isn't blank
+        if(this.arithType != -1 && this.secondNumString != "") {
 
-            switch(arithType){
-                case ADDITION: firstNum += secondNum;
+            //get the numbers from the strings
+            this.firstNum = Double.parseDouble(firstNumString);
+            this.secondNum = Double.parseDouble(secondNumString);
+
+            //calculate the two numbers based on the arithType
+            switch(this.arithType){
+                case ADDITION: this.firstNum += this.secondNum;
                     break;
-                case SUBTRACTION: firstNum -= secondNum;
+                case SUBTRACTION: this.firstNum -= this.secondNum;
                     break;
-                case MULTIPLICATION: firstNum *= secondNum;
+                case MULTIPLICATION: this.firstNum *= this.secondNum;
                     break;
-                case DIVISION: firstNum /= secondNum;
+                case DIVISION: this.firstNum /= this.secondNum;
             } //switch ends
 
+            //convert the calculated number back to a string
             firstNumString = String.valueOf(firstNum);
 
+            //set the secondNumString to blank
             secondNumString = "";
 
+            //output the calculated number
             this.outputTextView.setText(this.firstNumString);
         } //if ends
     } //method calculate ends
+
+    private void posNeg(){
+        //if it's the first number
+        if(this.isFirstNum){
+            //parse the string's value to make sure it isn't 0
+            if(Double.parseDouble(this.firstNumString) != 0){
+                //if there's no negative symbol, add one
+                //if there is a negative symbol, remove it
+                if(this.firstNumString.indexOf("-") == -1){
+                    this.firstNumString = "-" + this.firstNumString;
+                } //if ends
+                else{
+                    this.firstNumString = this.firstNumString.substring(1);
+                } //else ends
+
+                this.outputTextView.setText(this.firstNumString); //update the output
+            } //if ends
+        } //if ends
+
+        //else if it's the second number and it isn't blank
+        else if(secondNumString != ""){
+            //parse the string's value to make sure it isn't 0
+            if(Double.parseDouble(this.secondNumString) != 0) {
+                //if there's no negative symbol, add one
+                //if there is a negative symbol, remove it
+                if (this.secondNumString.indexOf("-") == -1) {
+                    this.secondNumString = "-" + this.secondNumString;
+                } //if ends
+                else {
+                    this.secondNumString = this.secondNumString.substring(1);
+                } //else ends
+
+                this.outputTextView.setText(this.firstNumString + this.arithTypeString + this.secondNumString); //update the output
+            } //if ends
+        } //else ends
+    } //method posNeg ends
+
+    private void percent(){
+        //make sure we're on the second number and it's not blank
+        if(!isFirstNum && secondNumString != ""){
+
+            //get the value of the numbers
+            firstNum = Double.parseDouble(firstNumString);
+            secondNum = Double.parseDouble(secondNumString);
+
+            //to get the percentage, divide the first number by 100 and multiply it by the second number
+            secondNum = ((firstNum / 100) * secondNum);
+
+            secondNumString = String.valueOf(secondNum); //convert secondNum back to a string
+
+            this.outputTextView.setText(this.firstNumString + this.arithTypeString + this.secondNumString); //update the output
+        } //if ends
+    } //method percent ends
+
+    private void clear(){
+        //reset all values
+        this.firstNum = 0;
+        this.firstNumString = "0";
+        this.secondNum = 0;
+        this.secondNumString = "";
+        this.isFirstNum = true;
+        this.arithType = -1;
+
+        this.outputTextView.setText(this.firstNumString); //update the display
+    } //method clear ends
 } //class MainActivity ends
