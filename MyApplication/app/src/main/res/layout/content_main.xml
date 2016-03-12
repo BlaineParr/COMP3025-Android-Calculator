@@ -28,8 +28,7 @@
             android:text="@string/outputString"
             android:id="@+id/outputTextView"
             android:layout_weight="4"
-            android:gravity="end"
-            android:textSize="48sp" />
+            android:gravity="end" />
     </LinearLayout>
 
     <LinearLayout
@@ -127,8 +126,8 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="@string/fourButtonString"
-            android:id="@+id/fourButton"
+            android:text="@string/sixButtonString"
+            android:id="@+id/sixButton"
             android:layout_weight="1"
             android:background="#e0e0e0" />
 
@@ -143,8 +142,8 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="@string/sixButtonString"
-            android:id="@+id/sixButton"
+            android:text="@string/fourButtonString"
+            android:id="@+id/fourButton"
             android:layout_weight="1"
             android:background="#e0e0e0" />
 
@@ -169,8 +168,8 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="@string/oneButtonString"
-            android:id="@+id/oneButton"
+            android:text="@string/threeButtonString"
+            android:id="@+id/threeButton"
             android:layout_weight="1"
             android:background="#e0e0e0" />
 
@@ -185,8 +184,8 @@
         <Button
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="@string/threeButtonString"
-            android:id="@+id/threeButton"
+            android:text="@string/oneButtonString"
+            android:id="@+id/oneButton"
             android:layout_weight="1"
             android:background="#e0e0e0" />
 
