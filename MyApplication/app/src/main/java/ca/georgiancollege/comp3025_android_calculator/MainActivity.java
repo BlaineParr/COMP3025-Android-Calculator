@@ -13,12 +13,20 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    //constants
+    final int ADDITION = 0;
+    final int SUBTRACTION = 1;
+    final int MULTIPLICATION = 2;
+    final int DIVISION = 3;
+
     //instance variables
     private double firstNum;
     private String firstNumString;
     private double secondNum;
     private String secondNumString;
     private boolean isFirstNum;
+    private int arithType;
+    private String arithTypeString;
 
     private TextView outputTextView;
     private Button clearButton;
@@ -143,6 +151,30 @@ public class MainActivity extends AppCompatActivity {
                 setNum(".");
             } //method onClick ends
         }); //setOnClickListener ends
+
+        this.addButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setArithType(ADDITION);
+            } //method onClick ends
+        }); //setOnClickListener ends
+
+        this.subtractButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setArithType(SUBTRACTION);
+            } //method onClick ends
+        }); //setOnClickListener ends
+
+        this.multiplyButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setArithType(MULTIPLICATION);
+            } //method onClick ends
+        }); //setOnClickListener ends
+
+        this.divideButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setArithType(DIVISION);
+            } //method onClick ends
+        }); //setOnClickListener ends
     } //method onCreate ends
 
     //private methods//////////////////////////////////////////////////////////////////////////////
@@ -170,9 +202,47 @@ public class MainActivity extends AppCompatActivity {
             //update the output
             this.outputTextView.setText(this.firstNumString);
         } //if ends
+
+        else
+        {
+            //if the number is equal to 0 and the user hasn't input a decimal
+            if(this.secondNumString == "0" && s != "."){
+                //the number is equal to the input value
+                this.secondNumString = s;
+            } //if ends
+            //if the user has input a decimal
+            else if(s == "."){
+                //if there isn't already a decimal
+                if(secondNumString.indexOf(s) == -1){
+                    //add the decimal to the end of the number
+                    this.secondNumString += s;
+                } //if ends
+            } //else if ends
+            else{
+                //add the input to the end of the number
+                this.secondNumString += s;
+            } //else ends
+
+            //update the output
+            this.outputTextView.setText(this.firstNumString + this.arithTypeString + this.secondNumString);
+        }
     } //method setNum ends
 
-    private void oneButtonClick(){
-        this.outputTextView.setText("Test");
-    } //method oneButtonClick ends
+    private void setArithType(int i){
+        switch(i){
+            case ADDITION: this.arithTypeString = " + ";
+                break;
+            case SUBTRACTION: this.arithTypeString = " - ";
+                break;
+            case MULTIPLICATION: this.arithTypeString = " x ";
+                break;
+            case DIVISION: this.arithTypeString = " / ";
+        } //switch ends
+
+        isFirstNum = false;
+
+        arithType = i;
+
+        this.outputTextView.setText(this.firstNumString + this.arithTypeString);
+    } //method setArithType ends
 } //class MainActivity ends
