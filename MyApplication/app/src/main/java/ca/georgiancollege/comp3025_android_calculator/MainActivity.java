@@ -50,7 +50,9 @@ public class MainActivity extends AppCompatActivity {
 
         //variable initialization
         this.firstNum = 0;
+        this.firstNumString = "0";
         this.secondNum = 0;
+        this.secondNumString = "0";
         this.isFirstNum = true;
 
         //widget initialization
@@ -78,12 +80,30 @@ public class MainActivity extends AppCompatActivity {
         //add methods to button clicks
         this.oneButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                oneButtonClick();
+                setNum('1');
             } //method onClick ends
         });
     } //method onCreate ends
 
     //private methods//////////////////////////////////////////////////////////////////////////////
+    private void setNum(char c){
+        if(this.isFirstNum){
+            if(this.firstNumString == "0" && c != '.'){
+                this.firstNumString = String.valueOf(c);
+            } //if ends
+            else if(c == '.'){
+                if(firstNumString.indexOf('.') == -1){
+                    this.firstNumString += c;
+                } //if ends
+            } //else if ends
+            else{
+                this.firstNumString += c;
+            } //else ends
+
+            this.outputTextView.setText(this.firstNumString);
+        } //if ends
+    } //method setNum ends
+
     private void oneButtonClick(){
         this.outputTextView.setText("Test");
     } //method oneButtonClick ends
