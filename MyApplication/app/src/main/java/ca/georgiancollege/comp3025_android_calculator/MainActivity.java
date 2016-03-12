@@ -80,26 +80,94 @@ public class MainActivity extends AppCompatActivity {
         //add methods to button clicks
         this.oneButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                setNum('1');
+                setNum("1");
             } //method onClick ends
-        });
+        }); //setOnClickListener ends
+
+        this.twoButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setNum("2");
+            } //method onClick ends
+        }); //setOnClickListener ends
+
+        this.threeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setNum("3");
+            } //method onClick ends
+        }); //setOnClickListener ends
+
+        this.fourButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setNum("4");
+            } //method onClick ends
+        }); //setOnClickListener ends
+
+        this.fiveButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setNum("5");
+            } //method onClick ends
+        }); //setOnClickListener ends
+
+        this.sixButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setNum("6");
+            } //method onClick ends
+        }); //setOnClickListener ends
+
+        this.sevenButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setNum("7");
+            } //method onClick ends
+        }); //setOnClickListener ends
+
+        this.eightButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setNum("8");
+            } //method onClick ends
+        }); //setOnClickListener ends
+
+        this.nineButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setNum("9");
+            } //method onClick ends
+        }); //setOnClickListener ends
+
+        this.zeroButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setNum("0");
+            } //method onClick ends
+        }); //setOnClickListener ends
+
+        this.decimalButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                setNum(".");
+            } //method onClick ends
+        }); //setOnClickListener ends
     } //method onCreate ends
 
     //private methods//////////////////////////////////////////////////////////////////////////////
-    private void setNum(char c){
+    private void setNum(String s){
+        //check if it's the first or second number
         if(this.isFirstNum){
-            if(this.firstNumString == "0" && c != '.'){
-                this.firstNumString = String.valueOf(c);
+            //if the number is equal to 0 and the user hasn't input a decimal
+            if(this.firstNumString == "0" && s != "."){
+                //the number is equal to the input value
+                this.firstNumString = s;
             } //if ends
-            else if(c == '.'){
-                if(firstNumString.indexOf('.') == -1){
-                    this.firstNumString += c;
+            //if the user has input a decimal
+            else if(s == "."){
+                //if there isn't already a decimal
+                if(firstNumString.indexOf(s) == -1){
+                    //add the decimal to the end of the number
+                    this.firstNumString += s;
                 } //if ends
             } //else if ends
             else{
-                this.firstNumString += c;
+                //add the input to the end of the number
+                this.firstNumString += s;
             } //else ends
 
+            //update the output
             this.outputTextView.setText(this.firstNumString);
         } //if ends
     } //method setNum ends
