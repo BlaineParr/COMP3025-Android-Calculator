@@ -14,6 +14,12 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     //instance variables
+    private double firstNum;
+    private String firstNumString;
+    private double secondNum;
+    private String secondNumString;
+    private boolean isFirstNum;
+
     private TextView outputTextView;
     private Button clearButton;
     private Button posNegButton;
@@ -42,26 +48,43 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //variable initialization
+        this.firstNum = 0;
+        this.secondNum = 0;
+        this.isFirstNum = true;
+
         //widget initialization
-        outputTextView = (TextView) findViewById(R.id.outputTextView);
-        clearButton = (Button) findViewById(R.id.clearButton);
-        posNegButton = (Button) findViewById(R.id.posNegButton);
-        percentButton = (Button) findViewById(R.id.percentButton);
-        divideButton = (Button) findViewById(R.id.divideButton);
-        sevenButton = (Button) findViewById(R.id.sevenButton);
-        eightButton = (Button) findViewById(R.id.eightButton);
-        nineButton = (Button) findViewById(R.id.nineButton);
-        multiplyButton = (Button) findViewById(R.id.multiplyButton);
-        fourButton = (Button) findViewById(R.id.fourButton);
-        fiveButton = (Button) findViewById(R.id.fiveButton);
-        sixButton = (Button) findViewById(R.id.sixButton);
-        addButton = (Button) findViewById(R.id.addButton);
-        oneButton = (Button) findViewById(R.id.oneButton);
-        twoButton = (Button) findViewById(R.id.twoButton);
-        threeButton = (Button) findViewById(R.id.threeButton);
-        subtractButton = (Button) findViewById(R.id.subtractButton);
-        zeroButton = (Button) findViewById(R.id.zeroButton);
-        decimalButton = (Button) findViewById(R.id.decimalButton);
-        calculateButton = (Button) findViewById(R.id.calculateButton);
-    }
-}
+        this.outputTextView = (TextView) findViewById(R.id.outputTextView);
+        this.clearButton = (Button) findViewById(R.id.clearButton);
+        this.posNegButton = (Button) findViewById(R.id.posNegButton);
+        this.percentButton = (Button) findViewById(R.id.percentButton);
+        this.divideButton = (Button) findViewById(R.id.divideButton);
+        this.sevenButton = (Button) findViewById(R.id.sevenButton);
+        this.eightButton = (Button) findViewById(R.id.eightButton);
+        this.nineButton = (Button) findViewById(R.id.nineButton);
+        this.multiplyButton = (Button) findViewById(R.id.multiplyButton);
+        this.fourButton = (Button) findViewById(R.id.fourButton);
+        this.fiveButton = (Button) findViewById(R.id.fiveButton);
+        this.sixButton = (Button) findViewById(R.id.sixButton);
+        this.addButton = (Button) findViewById(R.id.addButton);
+        this.oneButton = (Button) findViewById(R.id.oneButton);
+        this.twoButton = (Button) findViewById(R.id.twoButton);
+        this.threeButton = (Button) findViewById(R.id.threeButton);
+        this.subtractButton = (Button) findViewById(R.id.subtractButton);
+        this.zeroButton = (Button) findViewById(R.id.zeroButton);
+        this.decimalButton = (Button) findViewById(R.id.decimalButton);
+        this.calculateButton = (Button) findViewById(R.id.calculateButton);
+
+        //add methods to button clicks
+        this.oneButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                oneButtonClick();
+            } //method onClick ends
+        });
+    } //method onCreate ends
+
+    //private methods//////////////////////////////////////////////////////////////////////////////
+    private void oneButtonClick(){
+        this.outputTextView.setText("Test");
+    } //method oneButtonClick ends
+} //class MainActivity ends
