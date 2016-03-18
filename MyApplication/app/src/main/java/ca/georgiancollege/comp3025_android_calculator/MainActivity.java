@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     private boolean isFirstNum;
     private int arithType;
     private String arithTypeString;
+    private boolean resetRequested;
     private boolean resetRequired;
 
     DecimalFormat decFormat;
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         this.secondNumString = "";
         this.isFirstNum = true;
         this.arithType = -1;
+        this.resetRequested = false;
         this.resetRequired = false;
 
         decFormat = new DecimalFormat("0.##########");
@@ -109,6 +111,12 @@ public class MainActivity extends AppCompatActivity {
         this.oneButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!resetRequired) {
+
+                    //reset if one is requested before running setNum
+                    if(resetRequested) {
+                        clear();
+                    } //if ends
+
                     setNum("1");
                 } //if ends
             } //method onClick ends
@@ -117,6 +125,11 @@ public class MainActivity extends AppCompatActivity {
         this.twoButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!resetRequired) {
+                    //reset if one is requested before running setNum
+                    if(resetRequested) {
+                        clear();
+                    } //if ends
+
                     setNum("2");
                 } //if ends
             } //method onClick ends
@@ -125,6 +138,11 @@ public class MainActivity extends AppCompatActivity {
         this.threeButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!resetRequired) {
+                    //reset if one is requested before running setNum
+                    if(resetRequested) {
+                        clear();
+                    } //if ends
+
                     setNum("3");
                 } //if ends
             } //method onClick ends
@@ -133,6 +151,11 @@ public class MainActivity extends AppCompatActivity {
         this.fourButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!resetRequired) {
+                    //reset if one is requested before running setNum
+                    if(resetRequested) {
+                        clear();
+                    } //if ends
+
                     setNum("4");
                 } //if ends
             } //method onClick ends
@@ -141,6 +164,11 @@ public class MainActivity extends AppCompatActivity {
         this.fiveButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!resetRequired) {
+                    //reset if one is requested before running setNum
+                    if(resetRequested) {
+                        clear();
+                    } //if ends
+
                     setNum("5");
                 } //if ends
             } //method onClick ends
@@ -149,6 +177,11 @@ public class MainActivity extends AppCompatActivity {
         this.sixButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!resetRequired) {
+                    //reset if one is requested before running setNum
+                    if(resetRequested) {
+                        clear();
+                    } //if ends
+
                     setNum("6");
                 } //if ends
             } //method onClick ends
@@ -157,6 +190,11 @@ public class MainActivity extends AppCompatActivity {
         this.sevenButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!resetRequired) {
+                    //reset if one is requested before running setNum
+                    if(resetRequested) {
+                        clear();
+                    } //if ends
+
                     setNum("7");
                 } //if ends
             } //method onClick ends
@@ -165,6 +203,11 @@ public class MainActivity extends AppCompatActivity {
         this.eightButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!resetRequired) {
+                    //reset if one is requested before running setNum
+                    if(resetRequested) {
+                        clear();
+                    } //if ends
+
                     setNum("8");
                 } //if ends
             } //method onClick ends
@@ -173,6 +216,11 @@ public class MainActivity extends AppCompatActivity {
         this.nineButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!resetRequired) {
+                    //reset if one is requested before running setNum
+                    if(resetRequested) {
+                        clear();
+                    } //if ends
+
                     setNum("9");
                 } //if ends
             } //method onClick ends
@@ -181,6 +229,11 @@ public class MainActivity extends AppCompatActivity {
         this.zeroButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!resetRequired) {
+                    //reset if one is requested before running setNum
+                    if(resetRequested) {
+                        clear();
+                    } //if ends
+
                     setNum("0");
                 } //if ends
             } //method onClick ends
@@ -189,6 +242,11 @@ public class MainActivity extends AppCompatActivity {
         this.decimalButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!resetRequired) {
+                    //reset if one is requested before running setNum
+                    if(resetRequested) {
+                        clear();
+                    } //if ends
+
                     setNum(".");
                 } //if ends
             } //method onClick ends
@@ -237,6 +295,11 @@ public class MainActivity extends AppCompatActivity {
         this.posNegButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!resetRequired) {
+                    //reset if one is requested before running setNum
+                    if(resetRequested) {
+                        clear();
+                    } //if ends
+
                     posNeg();
                 } //if ends
             } //method onClick ends
@@ -245,6 +308,11 @@ public class MainActivity extends AppCompatActivity {
         this.percentButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if(!resetRequired) {
+                    //reset if one is requested before running setNum
+                    if(resetRequested) {
+                        clear();
+                    } //if ends
+
                     percent();
                 } //if ends
             } //method onClick ends
@@ -316,6 +384,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setArithType(int i){
         //check what the user input and change the arith type and displayed string accordingly
+
         switch(i){
             case ADDITION: this.arithTypeString = " + ";
                 break;
@@ -332,6 +401,7 @@ public class MainActivity extends AppCompatActivity {
         } //if ends
         else{
             this.calculate(); //calculate the expression, this allows for continuous calculations
+            this.resetRequested = false; //set resetRequested to false for continuous calculations
         } //else ends
 
         this.arithType = i; //set the arithType
@@ -344,6 +414,8 @@ public class MainActivity extends AppCompatActivity {
      * This function performs the mathematical operation between the two input numbers.
      */
     private void calculate(){
+        this.resetRequested = true; //request a reset for the next button press
+
         //local variables
         boolean error = false;
 
@@ -462,7 +534,7 @@ public class MainActivity extends AppCompatActivity {
         this.secondNumString = "";
         this.isFirstNum = true;
         this.arithType = -1;
-        this.resetRequired = false;
+        this.resetRequested = false;
         this.resetRequired = false;
 
         this.outputTextView.setText(this.firstNumString); //update the display
